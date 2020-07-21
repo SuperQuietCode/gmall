@@ -13,8 +13,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PersonModel {
+public class PersonModel implements Comparable {
     private String name;
     private Integer age;
     private String gender;
+
+    @Override
+    public int compareTo(Object o) {
+        return 0;
+    }
 }

@@ -3,10 +3,9 @@ package com.example.demo.test.stream;
 import com.example.demo.test.entity.Data;
 import com.example.demo.test.entity.PersonModel;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * stream练习
@@ -97,21 +96,108 @@ public class PersonModelStreamDemo {
 
         System.out.println();
         // 4
-        List<String> collect4 = list.stream().map(person->{
+        List<String> collect4 = list.stream().map(person -> {
             System.out.println(person.getName());
             return person.getName();
         }).collect(Collectors.toList());
     }
 
-    public static void flatMapString(){
+    public static void flatMapString() {
         List<PersonModel> list = Data.getData();
         // 返回值类型不一样
         List<String> collect = list.stream()
-                .flatMap(person-> Arrays.stream(person.getName().split(" "))).collect(Collectors.toList());
+                .flatMap(person -> Arrays.stream(person.getName().split(" "))).collect(Collectors.toList());
         System.out.println(collect);
+
+        List<Stream<String>> collect1 = list.stream()
+                .map(person -> Arrays.stream(person.getName().split(" "))).collect(Collectors.toList());
+
+        //用map实现
+        List<String> collect2 = list.stream()
+                .map(person -> person.getName().split(" "))
+                .flatMap(Arrays::stream).collect(Collectors.toList());
+        //另一种方式
+        List<String> collect3 = list.stream()
+                .map(person -> person.getName().split(" "))
+                .flatMap(str -> Arrays.asList(str).stream()).collect(Collectors.toList());
+    }
+
+    /**
+     * 数字，字符串的累加
+     */
+    public static void reduceDemo() {
+        // 累加， 初始化值是10
+        //累加，初始化值是 10
+        Integer reduce = Stream.of(1, 2, 3, 4)
+                .reduce(10, (count, item) -> {
+                    System.out.println("count:" + count);
+                    System.out.println("item:" + item);
+                    return count + item;
+                });
+
+        Integer reduce1 = Stream.of(1, 2, 3, 4)
+                .reduce(0, (x, y) -> x + y);
+        System.out.println(reduce1);
+
+        String reduce2 = Stream.of("1", "2", "3")
+                .reduce("0", (x, y) -> (x + "," + y));
+        System.out.println(reduce2);
+    }
+
+    /**
+     * collect在流中生成列表，map，等常用的数据结构
+     * toList()
+     * toSet()
+     * toMap()
+     * 自定义
+     */
+    public static void collectDemo() {
+        List<PersonModel> list = Data.getData();
+        // toList
+        List<String> collect = list.stream()
+                .map(PersonModel::getName)
+                .peek(person -> System.out.println(person))
+                .collect(Collectors.toList());
+
+        // toMap
+        Map<String, Integer> collect1 = list.stream()
+                .collect(Collectors.toMap(PersonModel::getName, PersonModel::getAge));
+        System.out.println(collect1);
+
+        // toSet
+        Set<String> collect2 = list.stream()
+                .map(PersonModel::getName).collect(Collectors.toSet());
+
+        Map<String, String> collect3 = list.stream().collect(Collectors.toMap(person -> person.getName(), value -> {
+            return value + "1";
+        }));
+        System.out.println("collect3" + collect3);
+
+        // 指定类型
+        TreeSet<PersonModel> collect4 = list.stream()
+                .collect(Collectors.toCollection(TreeSet::new));
+
+        // 分组
+        Map<Boolean, List<PersonModel>> collect5 = list.stream()
+                .collect(Collectors.groupingBy(person -> "男".equals(person.getGender())));
+        System.out.println("collect5" + collect5);
+
+        // 分隔
+        String collect6 = list.stream()
+                .map(person -> person.getName())
+                .collect(Collectors.joining(",", "{", "}"));
+        System.out.println("collect6" + collect6);
+
+        // 自定义
+        List<String> collect7 = Stream.of("1", "2", "3").collect(
+                Collectors.reducing(new ArrayList<String>(), x -> Arrays.asList(x), (y, z) -> {
+                    y.addAll(z);
+                    return y;
+                }));
+        System.out.println("collect7" + collect7);
     }
 
     public static void main(String[] args) {
-        flatMapString();
+        collectDemo();
     }
 }
