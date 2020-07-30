@@ -39,10 +39,6 @@ public class OptionalTest {
         System.out.println(Optional.ofNullable("1").orElseGet(()->{
             return "hahah";
         }));
-        //如果空，则可以抛出异常
-        System.out.println(Optional.ofNullable("1").orElseThrow(()->{
-            throw new RuntimeException("ss");
-        }));
 
         //利用 Optional 进行多级判断
 //        EarthModel earthModel1 = new EarthModel();
