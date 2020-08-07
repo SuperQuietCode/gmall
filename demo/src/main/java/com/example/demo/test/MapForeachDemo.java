@@ -15,7 +15,6 @@ public class MapForeachDemo {
         Map<String, Object> map = new HashMap<>();
         map.put("1", 1);
         map.put("2", 2);
-        map.put("3", "我的");
 
         // 使用lambda表达式的方式遍历
         map.forEach((key, value) -> System.out.println(key + "---" + value));
@@ -24,13 +23,6 @@ public class MapForeachDemo {
 
         for (Map.Entry<String, Object> m : map.entrySet()) {
             System.out.println(m.getKey() + "---" + m.getValue());
-        }
-
-        System.out.println("---------------------------");
-
-        for (String key : map.keySet()){
-            Object value = map.get(key);
-            System.out.println(key + "--" + value);
         }
     }
 }
