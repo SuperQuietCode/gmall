@@ -23,7 +23,7 @@ import java.util.Set;
  * redis配置类
  *
  * 新建缓存 redisTemplate.opsForValue().set("key","value");
- * 获取缓存 edisTemplate.opsForValue().get("key");
+ * 获取缓存 redisTemplate.opsForValue().get("key");
  *
  *
  * @author ZhaoXin
