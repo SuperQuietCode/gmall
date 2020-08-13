@@ -17,11 +17,12 @@ public class QuickSort {
         Arrays.stream(arr).forEach(a -> System.out.print(a + ","));
         System.out.println();
         quickSort(arr, 0, arr.length - 1);
+        System.out.print("[");
         for (int i = 0; i < arr.length; i++) {
             if(i < arr.length -1){
                 System.out.print(arr[i] + ",");
             }else {
-                System.out.println(arr[i]);
+                System.out.println(arr[i] + "]");
             }
         }
         Instant end = Instant.now();
