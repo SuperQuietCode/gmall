@@ -1,6 +1,7 @@
 package com.example.demo.test;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -23,6 +24,14 @@ public class MapForeachDemo {
 
         for (Map.Entry<String, Object> m : map.entrySet()) {
             System.out.println(m.getKey() + "---" + m.getValue());
+        }
+
+        System.out.println("---------------------------");
+        System.out.println("迭代器遍历");
+        Iterator<Map.Entry<String, Object>> setIter = map.entrySet().iterator();
+        while (setIter.hasNext()) {
+            Map.Entry<String, Object> entry = setIter.next();
+            System.out.println(entry.getKey() + "---" + entry.getValue());
         }
     }
 }
