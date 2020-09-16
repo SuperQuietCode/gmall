@@ -5,14 +5,11 @@ package com.example.demo.test;
  * @date 2020/8/7 11:05
  */
 
-import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.concurrent.CountDownLatch;
 
 @SpringBootTest
-@RunWith(SpringJUnit4ClassRunner.class)
 public class Test {
     //并发数量
     private static final int THREAD_NUM = 10000;
