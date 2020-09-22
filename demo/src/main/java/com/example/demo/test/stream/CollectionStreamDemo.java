@@ -87,6 +87,8 @@ public class CollectionStreamDemo {
 
         // 排序
         // sorted():自然排序，流中元素须实现Comparable
+        // 排序只创建了一个排列好后的Stream，而不会影响原有的数据源，
+        // 排序之后原数据stringCollection是不会被修改的
         List<String> list3 = Arrays.asList("aa", "ff", "dd");
         // String类自身以实现Compareable接口
         System.out.println("---sorted的用法---");
