@@ -1,1 +1,3 @@
 # 添加dev版本yml文件
+server:
+  port: 8091
