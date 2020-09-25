@@ -4,3 +4,38 @@ server:
 # 新建一个分支DailyDevelopment
 # 测试no-ff参数提交
 # 合并分支测试 --- 08点51分
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    timeout: 3600ms # 超时时间
+    jedis:
+      pool:
+        max-active: 8  #最大连接数
+        max-idle: 8   #最大空闲连接 默认8
+        max-wait: -1ms #默认-1 最大连接阻塞等待时间
+        min-idle: 0   #最小空闲连接
+  # jackson日期格式化
+  # 注解形式也可
+  # @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: GMT+8
+    # 如果返回值里边有null,空串""的话直接把这个属性去掉
+    serialization:
+      #格式化输出
+      indent_output: true
+      #忽略无法转换的对象
+      fail_on_empty_beans: false
+    #设置空如何序列化
+    defaultPropertyInclusion: NON_EMPTY
+    deserialization:
+      #允许对象忽略json中不存在的属性
+      fail_on_unknown_properties: false
+    parser:
+      #允许出现特殊字符和转义符
+      allow_unquoted_control_chars: true
+      #允许出现单引号
+      allow_single_quotes: true
+    # end
