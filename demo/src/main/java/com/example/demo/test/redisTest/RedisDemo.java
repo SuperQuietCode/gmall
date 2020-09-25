@@ -1,5 +1,6 @@
 package com.example.demo.test.redisTest;
 
+import com.example.demo.config.RedisKeys;
 import com.example.demo.util.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,8 @@ public class RedisDemo {
 
     @RequestMapping("/redis")
     public Object getRedis() {
-        redisUtil.set("test", "aaaaaa");
-        return redisUtil.get("test");
+        String key = RedisKeys.TEST.getKey();
+        redisUtil.set(key + "1", "aaaaaa");
+        return redisUtil.get(key + "1");
     }
 }
