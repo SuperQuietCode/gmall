@@ -7,7 +7,8 @@ package com.example.demo.config;
  * @date 2020/9/25 11:21
  */
 public enum RedisKeys {
-    TEST("TEST_KEY#");
+    TEST("TEST_KEY#"),
+    USERINFO("USER_KEY#");
 
     private String key;
     RedisKeys(String key) {

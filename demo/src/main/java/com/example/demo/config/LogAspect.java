@@ -25,9 +25,9 @@ import java.util.Arrays;
 public class LogAspect {
 
     // 单个情况
-    @Pointcut("execution(public * com.example.demo.test.*.*.*(..))")
+    // @Pointcut("execution(public * com.example.demo.test.*.*.*(..))")
     // 多个的情况
-    // execution(public * com.example.demo.serviceImpl.*.*(..) && public * com.example.demo.controller.*.*(..) ）
+    @Pointcut("execution(public * com.example.demo.services.*.*.*(..))")
     public void logPointcut() {
 
     }
