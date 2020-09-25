@@ -31,14 +31,13 @@ public class LoginServicesImpl implements LoginServices {
     @Override
     public ResultStat loginCheck(UserVO user) {
         if (EmptyUtil.isEmpty(user.getUserName()) ||
-                EmptyUtil.isEmpty(user.getPassWord())
-        ) {
+                EmptyUtil.isEmpty(user.getPassWord())) {
             return ResultStat.PAYLOAD_MISS;
         }
         String key = RedisKeys.USERINFO.getKey() + user.getUserName();
 
         // 如果redis查询到数据
-        if((redisUtil.hasKey(key + user.getUserName()))){
+        if(redisUtil.hasKey(key)){
             return ResultStat.SUCCESS;
         }else {
             UserDO userDO = userInfoDao.selectOne(new QueryWrapper<UserDO>().lambda()
