@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+    <contextName>demo</contextName>
+    <!--  日志文件输出地址  -->
+    <property name="logback.path" value="D:/logs/demolog"/>
+    <!-- 控制台输出 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!--  按照每天生成日志文件  -->
+    <appender name="appFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 输出文件格式，每天一归档 -->
+            <fileNamePattern>${logback.path}/demo.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- 日志文件保存周期天数 -->
+            <maxHistory>15</maxHistory>
+            <!-- 日志文件上限大小 -->
+            <totalSizeCap>1GB</totalSizeCap>
+            <!--单个日志文件最大大小-->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- 达到限制时清空原来日志文件 -->
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %level %logger{36} [%file: %line] - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!--  日志输出级别  -->
+    <root level="info">
+        <appender-ref ref="console"/>
+        <appender-ref ref="appFile"/>
+    </root>
+    <!--  包输出级别，会覆盖root输出级别  -->
+    <logger name="com.example.demo.controller" level="INFO" additivity="false">
+        <appender-ref ref="appFile"/>
+    </logger>
+</configuration>
