@@ -1,4 +1,4 @@
-package com.example.demo.db;
+package com.example.demo.Dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.demo.DO.UserDO;

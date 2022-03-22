@@ -5,7 +5,7 @@ import com.example.demo.DO.UserDO;
 import com.example.demo.VO.UserVO;
 import com.example.demo.base.ResultStat;
 import com.example.demo.config.RedisKeys;
-import com.example.demo.db.UserInfoDao;
+import com.example.demo.Dao.UserInfoDao;
 import com.example.demo.services.LoginServices;
 import com.example.demo.util.EmptyUtil;
 import com.example.demo.util.RedisUtil;
